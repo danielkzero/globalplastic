@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GlobalPlastic | Indústria e Comércio de Plásticos</title>
+    <meta name="description"
+        content="GlobalPlastic oferece soluções em tubos, conexões e acessórios plásticos para indústrias e construção civil. Qualidade e confiança em cada produto.">
+    <meta name="keywords"
+        content="indústria de plásticos, comércio de plásticos, tubos de PVC, conexões de PVC, produtos plásticos industriais, materiais plásticos para construção, acessórios plásticos">
+    <link rel="canonical" href="https://www.globalplastic.com.br/">
+
+    <!-- CDN tailwindCSS -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- styles -->
+    <style>
+        .container {
+            width: 1300px !important;
+        }
+    </style>
+</head>
+
+<body id="body" class="bg-gray-100">
+
+    <!-- top header usando tailwind -->
+    <header class="bg-gray-200 text-gray-500">
+
+        <!-- menu top header -->
+        <div class="md:container mx-auto px-4 py-2 flex justify-between items-center">
+            <div class="text-sm">
+                <span>
+                    <a href="/sobrenos" class="text-gray-500 hover:text-gray-800">
+                        Sobre nós
+                    </a>
+                </span>
+                <span class="mx-2">•</span>
+                <span>
+                    <a href="/trabalheconosco" class="text-gray-500 hover:text-gray-800">
+                        Trabalhe conosco
+                    </a>
+                </span>
+                <span class="mx-2">•</span>
+                <span>
+                    <a href="/promocoes" class="text-gray-500 hover:text-gray-800">
+                        Promoções
+                    </a>
+                </span>
+            </div>
+            <div class="text-sm">
+                <span>
+                    <a href="tel:+552433281000" class="text-gray-500 hover:text-gray-800">
+                        Contato: +55 24 3328-1000
+                    </a>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- header usando tailwind -->
+    <header class="bg-white shadow">
+        <div class="md:container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="logo">
+                <a href="/" class="text-2xl font-bold text-gray-800">
+                    <img src="/assets/img/logomarca.png" alt="GlobalPlastic" class="h-10 inline">
+                </a>
+            </div>
+
+            <!-- search para buscar produtos no site -->
+            <div class="search-bar flex-1 mx-4">
+                <form action="/search" method="GET" class="relative">
+                    <input type="text" name="q" placeholder="Buscar produtos..."
+                        class="w-full border border-gray-300 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <button type="submit" class="absolute left-0 top-0 mt-2 ml-3 text-gray-400 hover:text-gray-600">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- menu com dropdown -->
+            <!-- home, a empresa, produtos [construção civil, epi, supermercado, vasos, promoções e etc], contato, -->
+            <nav class="relative">
+                <div class="relative flex h-16 items-center justify-between">
+                    <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="hidden sm:ml-6 sm:block">
+                            <ul class="flex space-x-4 text-gray-600">
+                                <li>
+                                    <a href="#">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Empresa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Produtos
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        Contato
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <section class="md:container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-7 md:grid-flow-col md:grid-rows-5 gap-4 my-4">
+            <div 
+                class="md:row-span-5 md:col-span-4 rounded-lg h-[552px] 
+                bg-gradient-to-r from-blue-500 to-blue-400">
+
+                <div class="md:row-span-5 md:col-span-4 rounded-lg h-[552px] 
+                    bg-[url('/assets/img/bg-banner-3.png')] bg-no-repeat bg-cover bg-bottom-right bg-size-[700px]">
+                </div>
+
+            </div>
+            <div 
+                class="md:row-span-2 md:col-span-2 bg-green-300 rounded-lg 
+                bg-[url('/assets/img/metaverse.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+
+            </div>
+            <div 
+                class="md:row-span-3 md:col-span-2 bg-fuchsia-300 rounded-lg 
+                bg-[url('/assets/img/headphone.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+
+            </div>
+            <div class="md:row-span-5 md:col-span-1 border border-gray-300 rounded-lg">
+                <div class="flex flex-col gap-3 m-3">
+                    <img src="/assets/img/promotion1.png">
+                    <img src="/assets/img/promotion2.png">
+                    <img src="/assets/img/promotion3.png">
+                    <img src="/assets/img/promotion4.png">
+                    <img src="/assets/img/promotion5.png">
+                    <img src="/assets/img/promotion6.png">
+                    <img src="/assets/img/promotion5.png">
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="md:container mx-auto my-4 flex item-center justify-center gap-6">
+            <div v-for="brand in brands">
+                <img :src="brand" class="h-10 transtion opacity-20 hover:opacity-50 cursor-pointer" />
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="md:container mx-auto mt-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div v-for="destaque in destaques" :key="destaque.id"
+                    class="bg-white gap-4 p-3 rounded-lg border border-gray-300 transition transform flex items-start justify-start">
+                    <div class="h-full flex flex-col">
+                        <img src="/assets/img/products/Registro-de-pressao-cromado-300x300.png"
+                            class="h-16 block mx-auto">
+                        <div class="mt-auto">
+                            <a href="#ver-produto"
+                                class="px-2 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 w-full block">
+                                ver tudo
+                            </a>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-semibold">Hidraulica</h2>
+                        <ul class="text-sm">
+                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CDN vue3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+    <script>
+        Vue.createApp({
+            data() {
+                
+                return {
+                    destaques: [
+                        {
+                            id: 1,
+                            nome: 'Hidraulica',
+                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
+                            link: '#ver-produto',
+                            itens: [
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                }
+                            ]
+                        },
+                        {
+                            id: 2,
+                            nome: 'Hidraulica',
+                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
+                            link: '#ver-produto',
+                            itens: [
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                }
+                            ]
+                        },
+                        {
+                            id: 3,
+                            nome: 'Hidraulica',
+                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
+                            link: '#ver-produto',
+                            itens: [
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                }
+                            ]
+                        },
+                        {
+                            id: 4,
+                            nome: 'Hidraulica',
+                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
+                            link: '#ver-produto',
+                            itens: [
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                },
+                                {
+                                    nome: 'Registro de pressão',
+                                    link: '/produtos/hidraulica/registro'
+                                }
+                            ]
+                        }
+                    ],
+                    brands: [
+                        '/assets/img/logos-svg/Acer_2011.svg',
+                        '/assets/img/logos-svg/Amazon_Games_2025.svg',
+                        '/assets/img/logos-svg/AMD_Logo.svg',
+                        '/assets/img/logos-svg/Bosch-Logo.svg',
+                        '/assets/img/logos-svg/Canon_logo.svg',
+                        '/assets/img/logos-svg/Casio_logo.svg',
+                        '/assets/img/logos-svg/Epson_logo.svg',
+                        '/assets/img/logos-svg/Microsoft_logo_(1987).svg',
+                        '/assets/img/logos-svg/Xerox_logo_(1968-2008).svg'
+                    ]
+                }
+            }
+        }).mount('body');
+    </script>
+</body>
+
+</html>
