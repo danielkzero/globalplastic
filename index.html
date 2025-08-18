@@ -11,13 +11,26 @@
         content="indústria de plásticos, comércio de plásticos, tubos de PVC, conexões de PVC, produtos plásticos industriais, materiais plásticos para construção, acessórios plásticos">
     <link rel="canonical" href="https://www.globalplastic.com.br/">
 
+    <!-- CDN moments -->
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
+
     <!-- CDN tailwindCSS -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- CDN boxicons -->
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+
+    <!-- CDN Google -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=roboto">
+
     <!-- styles -->
     <style>
+        * {
+            font-family: "Roboto", Arial, Helvetica, sans-serif;
+        }
+
         .container {
-            width: 1300px !important;
+            width: 1200px !important;
         }
     </style>
 </head>
@@ -25,10 +38,10 @@
 <body id="body" class="bg-gray-100">
 
     <!-- top header usando tailwind -->
-    <header class="bg-gray-200 text-gray-500">
+    <header class="hidden md:block bg-gray-200 text-gray-500">
 
         <!-- menu top header -->
-        <div class="md:container mx-auto px-4 py-2 flex justify-between items-center">
+        <div class="md:container mx-auto py-2 flex justify-between items-center">
             <div class="text-sm">
                 <span>
                     <a href="/sobrenos" class="text-gray-500 hover:text-gray-800">
@@ -60,7 +73,7 @@
 
     <!-- header usando tailwind -->
     <header class="bg-white shadow">
-        <div class="md:container mx-auto px-4 py-4 flex justify-between items-center">
+        <div class="md:container mx-auto py-4 flex justify-between items-center">
             <div class="logo">
                 <a href="/" class="text-2xl font-bold text-gray-800">
                     <img src="/assets/img/logomarca.png" alt="GlobalPlastic" class="h-10 inline">
@@ -116,194 +129,545 @@
             </nav>
         </div>
     </header>
-    <section class="md:container mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-7 md:grid-flow-col md:grid-rows-5 gap-4 my-4">
-            <div 
-                class="md:row-span-5 md:col-span-4 rounded-lg h-[552px] 
-                bg-gradient-to-r from-blue-500 to-blue-400">
 
-                <div class="md:row-span-5 md:col-span-4 rounded-lg h-[552px] 
-                    bg-[url('/assets/img/bg-banner-3.png')] bg-no-repeat bg-cover bg-bottom-right bg-size-[700px]">
+    <main class="md:px-0 px-3">
+        
+        <!-- Section carousel e banner populares -->
+        <section class="md:container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-6 md:grid-flow-col md:grid-rows-5 gap-4 my-4">
+
+                <!-- CAROUSEL PRINCIPAL -->
+                <div
+                    class="relative md:row-span-5 md:col-span-4 rounded-lg md:h-[564px] overflow-hidden bg-blue-300/70">
+
+                    <!-- Slides -->
+                    <div class="flex transition-transform duration-700 ease-in-out h-full"
+                        :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
+                        <div v-for="(slide, index) in slides" :key="index"
+                            class="w-full flex-shrink-0 h-[564px] rounded-lg"
+                            :class="`bg-[url('${slide.bg}')] bg-blue-400/70 hover:bg-blue-400/50 bg-no-repeat bg-cover bg-bottom-right md:bg-size-[700px] bg-size-[400px]`">
+                            <div class="md:p-16 p-8 text-blue-800">
+                                <div class="text-gray-100 my-4">{{ slide.subtitle }}</div>
+                                <div class="md:text-6xl text-2xl font-bold md:my-4">
+                                    {{ slide.title1 }}
+                                </div>
+                                <div class="md:text-6xl text-2xl font-bold md:my-4">
+                                    {{ slide.title2 }}
+                                </div>
+                                <div class="md:w-1/2 py-4">
+                                    {{ slide.description }}
+                                </div>
+                                <div class="py-4 flex gap-4">
+                                    <a href="#compre_mais"
+                                        class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-blue-100 rounded-lg">
+                                        compre agora
+                                    </a>
+                                    <a href="#compre_mais"
+                                        class="px-8 py-4 text-blue-600 hover:bg-blue-100/30 rounded-lg">
+                                        saiba mais
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Indicadores -->
+                    <div class="absolute bottom-16 left-16 flex space-x-3">
+                        <button v-for="(slide, index) in slides" :key="index" class="w-3 h-3 rounded-full"
+                            :class="currentSlide === index ? 'bg-white opacity-100' : 'bg-white opacity-50'"
+                            @click="goToSlide(index)"></button>
+                    </div>
+                </div>
+
+                <!-- BLOCO 2 -->
+                <div
+                    class="row-span-5 col-span-1 md:row-span-2 md:col-span-2 bg-green-200/70 hover:bg-green-200/50 transition rounded-lg h-[200px] md:h-auto bg-[url('/assets/img/metaverse.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+                    <div class="md:p-8 p-4 text-gray-600">
+                        <div class="md:text-4xl text-2xl font-bold my-4">Metaverse</div>
+                        <div class="md:w-1/2">The Future of Creativity</div>
+                        <div class="py-4 flex gap-4">
+                            <a href="#compre_mais"
+                                class="text-green-700 hover:text-green-500 rounded-lg flex items-center">
+                                saiba mais <i class="bx bx-arrow-right-stroke text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BLOCO 3 -->
+                <div
+                    class="row-span-5 col-span-1 md:row-span-3 md:col-span-2 bg-fuchsia-300/70 hover:bg-fuchsia-300/50 transition rounded-lg h-[200px] md:h-auto bg-[url('/assets/img/headphone.png')] bg-no-repeat bg-bottom-right md:bg-size-[300px] bg-size-[150px]">
+                    <div class="md:p-8 p-4 text-gray-600">
+                        <div class="md:text-4xl text-2xl font-bold my-4 md:w-2/3">
+                            Dispositivos e software da Apple
+                        </div>
+                        <div class="md:w-1/2">Não perca a última oportunidade.</div>
+                        <div class="py-4 flex gap-4">
+                            <a href="#compre_mais"
+                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
+                                saiba mais <i class="bx bx-arrow-right-stroke text-xl"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
             </div>
-            <div 
-                class="md:row-span-2 md:col-span-2 bg-green-300 rounded-lg 
-                bg-[url('/assets/img/metaverse.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+        </section>
 
-            </div>
-            <div 
-                class="md:row-span-3 md:col-span-2 bg-fuchsia-300 rounded-lg 
-                bg-[url('/assets/img/headphone.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
-
-            </div>
-            <div class="md:row-span-5 md:col-span-1 border border-gray-300 rounded-lg">
-                <div class="flex flex-col gap-3 m-3">
-                    <img src="/assets/img/promotion1.png">
-                    <img src="/assets/img/promotion2.png">
-                    <img src="/assets/img/promotion3.png">
-                    <img src="/assets/img/promotion4.png">
-                    <img src="/assets/img/promotion5.png">
-                    <img src="/assets/img/promotion6.png">
-                    <img src="/assets/img/promotion5.png">
+        <!-- Section marcas e categorias -->
+        <section>
+            <div class="md:container mx-auto my-8 md:flex item-center justify-center gap-2 hidden text-gray-600">
+                <div class="w-1/4">
+                    <h2 class="text-3xl font-bold flex items-center">
+                        <i class='bx  bxs-certification mr-2'></i>
+                        Destaques
+                    </h2>
+                    <small>Aqui você encontra a melhor opção para você:</small>
+                </div>
+                <div class="w-3/4 flex item-center justify-center gap-6 border border-gray-300 rounded-lg p-3">
+                    <div v-for="brand in brands" class="w-auto">
+                        <img :src="brand" class="h-10 transtion opacity-20 hover:opacity-50 cursor-pointer" />
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section>
-        <div class="md:container mx-auto my-4 flex item-center justify-center gap-6">
-            <div v-for="brand in brands">
-                <img :src="brand" class="h-10 transtion opacity-20 hover:opacity-50 cursor-pointer" />
-            </div>
-        </div>
-    </section>
-    <section>
-        <div class="md:container mx-auto mt-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                <div v-for="destaque in destaques" :key="destaque.id"
-                    class="bg-white gap-4 p-3 rounded-lg border border-gray-300 transition transform flex items-start justify-start">
-                    <div class="h-full flex flex-col">
-                        <img src="/assets/img/products/Registro-de-pressao-cromado-300x300.png"
-                            class="h-16 block mx-auto">
+        </section>
+
+        <!-- Section produtos destaques -->
+        <section>
+            <div class="md:container mx-auto mt-4">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div v-for="destaque in destaques" :key="destaque.id"
+                        class="gap-4 p-3 rounded-lg border border-gray-300 transition transform flex items-start justify-start relative">
+                        <div class="h-full flex flex-col">
+                            <img src="/assets/img/products/Registro-de-pressao-cromado-300x300.png"
+                                class="h-16 block mx-auto">
+                        </div>
+                        <div class="mb-5">
+                            <h2 class="text-xl font-semibold">Hidraulica</h2>
+                            <ul class="text-sm">
+                                <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                                <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                                <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                                <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
+                            </ul>
+                        </div>
                         <div class="mt-auto">
                             <a href="#ver-produto"
-                                class="px-2 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 w-full block">
+                                class="absolute px-2 py-1 rounded-br-lg bg-gray-200 hover:bg-gray-300 block bottom-0 right-0">
                                 ver tudo
                             </a>
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section banner destaque -->
+        <section>
+            <div class="md:container md:mx-auto grid grid-cols-1 md:grid-cols-8 gap-4 my-8">
+                <div class="bg-blue-300 rounded-lg  md:col-span-2
+                    bg-[url('/assets/img/iphone-12.png')] bg-no-repeat bg-cover bg-bottom-right bg-size-[200px]">
+                    <div class="md:p-8 p-4 text-gray-600">
+                        <div class="md:text-4xl text-2xl font-bold my-4">
+                            iPhone 12 Pro 128Gb
+                        </div>
+                        <div class="md:w-1/2">
+                            Venda especial
+                        </div>
+                        <div class="py-4 flex gap-4">
+                            <a href="#compre_mais"
+                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
+                                saiba mais <i class='bx  bx-arrow-right-stroke text-xl'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-green-300 rounded-lg h-[230px] md:h-auto md:col-span-3
+                    bg-[url('/assets/img/samsung.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+                    <div class="md:p-8 p-4 text-gray-600">
+                        <div class="md:text-4xl text-2xl font-bold my-4">
+                            Samsung 2022 Led TV
+                        </div>
+                        <div class="md:w-1/2">
+                            Venda especial
+                        </div>
+                        <div class="py-4 flex gap-4">
+                            <a href="#compre_mais"
+                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
+                                saiba mais <i class='bx  bx-arrow-right-stroke text-xl'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-3 bg-fuchsia-300 rounded-lg h-[230px] md:h-auto 
+                    bg-[url('/assets/img/drone.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+                    <div class="md:p-8 p-4 text-gray-600">
+                        <div class="md:text-4xl text-2xl font-bold my-4 ">
+                            Dispositivos e software da Apple
+                        </div>
+                        <div class="md:w-1/2">
+                            Não perca a última
+                            oportunidade.
+                        </div>
+                        <div class="py-4 flex gap-4">
+                            <a href="#compre_mais"
+                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
+                                saiba mais <i class='bx  bx-arrow-right-stroke text-xl'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section mais vendidos -->
+        <section>
+            <div
+                class="md:container md:mx-auto flex items-center justify-between relative border-b border-gray-300 my-2 py-2 text-gray-600">
+                <div>
+                    <h2 class="text-3xl font-bold flex items-center">
+                        <i class='bx  bx-trending-up mr-2'></i>
+                        Mais vendidos
+                    </h2>
+                    <small>Produtos especiais neste mês.</small>
+                </div>
+                <div>
+                    <ul class="hidden md:flex item-end justify-center gap-6">
+                        <li>Todos</li>
+                        <li>Mais vendidos</li>
+                        <li>Mais vistos</li>
+                    </ul>
+                    <div class="md:hidden flex p-2 bg-gray-200/70 hover:bg-gray-200/90 rounded-lg">
+                        <i class='bx bx-dots-vertical-rounded'></i>
+                    </div>
+                </div>
+            </div>
+            <div class="md:container mx-auto mt-4">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div v-for="destaque in destaques" :key="destaque.id"
+                        class="gap-4 p-3 rounded-lg border border-gray-300 transition transform relative bg-white">
+                        <img src="/assets/img/imgsp3.png" class="w-full block mx-auto">
+                        <div>
+                            <small class="text-xs text-gray-400">Apple</small>
+                            <h2 class="font-bold text-gray-600">iMac 2022 com tela Retina 5K, 8 GB de RAM e 256 GB</h2>
+                            <div class="flex items-center justify-between p-3 gap-3">
+                                <div class="line-through text-gray-400">R$ 3225,6</div>
+                                <div class="text-gray-600 text-2xl font-bold">R$ 2856,3</div>
+                            </div>
+                            <a href="/carrinho/add"
+                                class="w-full p-3 border border-gray-500 transition transition-all text-gray-500 hover:border-gray-700 hover:bg-gray-700 hover:text-gray-100 block my-4 rounded-lg text-center">
+                                Adicionar ao carrinho
+                            </a>
+                            <ul class="text-sm text-gray-600">
+                                <li>Tela Retina 5K de 27 polegadas (diagonal)</li>
+                                <li>Intel Core i5 de 6 núcleos de 3,1 GHz de 10ª geração</li>
+                                <li>Placa de vídeo AMD Radeon Pro 5300</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section últimas ofertas -->
+        <section class="my-8" v-if="displayOferta">
+            <div
+                class="md:container md:mx-auto md:flex md:items-center md:justify-between relative border-b border-gray-300 py-2 text-gray-600">
+                <div>
+                    <h2 class="text-3xl flex items-center font-bold">
+                        <i class='bx  bxs-discount mr-2'></i>
+                        Últimas ofertas
+                    </h2>
+                    <small>Produtos especiais neste mês.</small>
+                </div>
+                <div class="flex items-center justify-end text-gray-500 gap-4">
                     <div>
-                        <h2 class="text-xl font-semibold">Hidraulica</h2>
-                        <ul class="text-sm">
-                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
-                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
-                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
-                            <li><a href="/produtos/hidraulica/registro">Registro de pressão</a></li>
-                        </ul>
+                        <div class="font-bold text-right">Corra!</div>
+                        <div class="text-xs">As ofertas terminam em:</div>
+                    </div>
+                    <div class="text-xl gap-1 flex items-center" v-html="contadorOferta">
+                    </div>
+                    <div>
+                        <a href="#ver tudo"
+                            class="flex items-center p-2 text-gray-500 hover:text-gray-800 transition transition-all">
+                            ver tudo <i class='bxr bx-arrow-right-stroke text-2xl'></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="md:container mx-auto mt-4">
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div v-for="destaque in destaques" :key="destaque.id"
+                        class="gap-4 p-3 rounded-lg border border-gray-300 transition transform relative bg-white">
+                        <img src="/assets/img/imgsp3.png" class="w-full block mx-auto">
+                        <div>
+                            <small class="text-xs text-gray-400">Apple</small>
+                            <h2 class="font-bold text-gray-600">iMac 2022 com tela Retina 5K, 8 GB de RAM e 256 GB</h2>
+                            <div class="flex items-center justify-between p-3 gap-3">
+                                <div class="line-through text-gray-400">R$ 3225,6</div>
+                                <div class="text-gray-600 text-2xl font-bold">R$ 2856,3</div>
+                            </div>
+                            <a href="/carrinho/add"
+                                class="w-full p-3 border border-gray-500 transition transition-all text-gray-500 hover:border-gray-700 hover:bg-gray-700 hover:text-gray-100 block my-4 rounded-lg text-center">
+                                Adicionar ao carrinho
+                            </a>
+                            <ul class="text-sm text-gray-600">
+                                <li>Tela Retina 5K de 27 polegadas (diagonal)</li>
+                                <li>Intel Core i5 de 6 núcleos de 3,1 GHz de 10ª geração</li>
+                                <li>Placa de vídeo AMD Radeon Pro 5300</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section cchamada para ação inscrever-se -->
+        <section>
+            <div class="md:container mx-auto my-16">
+                <div
+                    class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-8 border-gray-700 bg-gray-800/80 rounded-lg shadow-lg">
+
+                    <!-- Texto -->
+                    <div>
+                        <h3 class="text-xl md:text-2xl font-bold text-gray-100">Assine e ganhe <span
+                                class="text-amber-300">10%</span> de desconto</h3>
+                        <p class="mt-1 text-gray-100">
+                            Receba atualizações por e-mail sobre nossas últimas novidades e ofertas especiais.
+                        </p>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="flex flex-wrap gap-3">
+                        <div
+                            class="flex items-center rounded-xl bg-white  border border-gray-300  focus-within:border-amber-500 overflow-hidden">
+                            <input type="text" name="email_informativo" placeholder="Seu e-mail"
+                                class="block w-full py-3 px-4 text-base text-gray-900 placeholder:text-gray-400 bg-transparent focus:outline-none"
+                                v-model="inputEndereco" @input="handleInput" autocomplete="off">
+                            <button type="submit"
+                                class="inline-flex items-center gap-2 px-6 py-3 bg-gray-600 text-white font-semibold shadow hover:shadow-md hover:bg-gray-700 transition-transform hover:scale-105">
+                                Assinar <i class='bx  bx-news text-lg'></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section lista de produtos populares -->
+        <section>
+            <div class="md:container mx-auto my-16">
+                <div
+                    class="md:container md:mx-auto flex items-center justify-between relative border-b border-gray-300 py-2 text-gray-600 mb-2">
+                    <div>
+                        <h2 class="text-3xl flex items-center font-bold">
+                            <i class='bx  bxs-star mr-2'></i>
+                            Mais populares
+                        </h2>
+                        <small>Os produtos mais visitados nos últimos 30 dias.</small>
+                    </div>
+                    <div class="flex items-center justify-end text-gray-500 gap-4">
+                        <div>
+                            <a href="#ver tudo"
+                                class="flex items-center p-2 text-gray-500 hover:text-gray-800 transition transition-all">
+                                ver tudo <i class='bxr bx-arrow-right-stroke text-2xl'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-x-4">
+                    <div v-for="item in produtos" class="col-span-1 text-xs lowercase">
+                        <a :href="`/${item.codigo}`">
+                            {{ item.nome }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+
+    <footer class="bg-gray-900 text-gray-300 py-10">
+        <div class="md:container md:mx-auto mx-3">
+            <div class="grid grid-cols-1 md:grid-cols-12 md:gap-8 gap-y-8">
+
+                <!-- Sobre Nós -->
+                <div class="col-span-12 md:col-span-5 space-y-4">
+                    <a href="index.html" class="flex items-center text-2xl font-bold">
+                        <span>Sobre-nós</span>
+                    </a>
+                    <p>
+                        <strong>Globalplastic Indústria e Comércio</strong> – Especializada na fabricação de materiais
+                        para construção
+                        civil e utilidades. Produzimos sifões, torneiras, duchas e chuveiros, mecanismos de descarga,
+                        boias para caixa d’água, tanques plásticos, armários de banheiro, além de equipamentos
+                        de proteção individual (EPI).
+                    </p>
+                    <div class="flex space-x-4 mt-4 text-2xl">
+                        <a href="http://www.twitter.com/wanlog" class="hover:text-blue-500">
+                            <i class='bxl bx-twitter'></i>
+                        </a>
+                        <a href="http://www.facebook.com/wanlog" class="hover:text-blue-700">
+                            <i class='bxl bx-facebook'></i>
+                        </a>
+                        <a href="http://www.instagram.com/wanlog" class="hover:text-pink-500">
+                            <i class='bxl bx-instagram'></i>
+                        </a>
+                        <a href="http://www.linkedin.com/wanlog" class="hover:text-blue-600">
+                            <i class='bxl bx-linkedin'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mais usados -->
+                <div class="md:col-span-2 col-span-12">
+                    <h4 class="text-lg font-semibold mb-2">Mais usados</h4>
+                    <ul class="space-y-1">
+                        <li><a href="/" class="hover:text-blue-500">Início</a></li>
+                        <li><a href="sobre.html" class="hover:text-blue-500">Sobre</a></li>
+                        <li><a href="servicos.html" class="hover:text-blue-500">Serviços</a></li>
+                        <li><a href="contato.html" class="hover:text-blue-500">Contato</a></li>
+                        <li><a href="politica-de-privacidade.html" class="hover:text-blue-500">Política de
+                                privacidade</a></li>
+                    </ul>
+                </div>
+
+                <!-- Outros -->
+                <div class="md:col-span-2 col-span-12">
+                    <h4 class="text-lg font-semibold mb-2">Outros</h4>
+                    <ul class="space-y-1">
+                        <li><a href="area-de-atuacao.html" class="hover:text-blue-500">Catálogo de imagens</a></li>
+                        <li><a href="agendar-coleta.html" class="hover:text-blue-500">Banco de imagens</a></li>
+                        <li><a href="fazer-cotacao.html" class="hover:text-blue-500">Downloads</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contato -->
+                <div class="md:col-span-3 col-span-12 text-center md:text-left space-y-2">
+                    <h4 class="text-lg font-semibold mb-2">Contate-nos</h4>
+                    <p class="text-sm">
+                        Rua João Afonso Borge, 720 <br>
+                        Vila Independência, Barra Mansa<br>
+                        Rio de Janeiro - Brasil <br><br>
+                        <strong>Telefone:</strong> +55 24 3328-1000<br>
+                        <strong>E-mail:</strong> atendimento@globalplastic.com.br<br>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Copyright -->
+        <div class="md:container mx-auto px-4 mt-8 text-center space-y-2 text-sm text-gray-400">
+            <!-- copyright wanlog -->
+            <div>&copy; 2025 <strong>GlobalPlastic</strong>. Todos os direitos reservados.</div>
+
+            <!-- agência criadora do site wanlog -->
+            <div class="mx-auto">
+                <div class="flex items-center justify-center space-x-4">
+
+                    <!-- Logo -->
+                    <div class="flex-shrink-0">
+                        <a href="https://hydradigital.com.br" target="_blank" class="no-underline">
+                            <img src="/assets/img/logo-hydra.20ca10f7.png" alt="Hydra Digital" class="h-16">
+                        </a>
+                    </div>
+
+                    <!-- Texto -->
+                    <div>
+                        <a href="https://hydradigital.com.br" target="_blank"
+                            class="no-underline text-gray-500 text-sm">
+                            Desenvolvido por<br>
+                            <strong>Hydra Digital</strong><br>
+                            Daniel Ramos
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </footer>
 
     <!-- CDN vue3 -->
     <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
 
+    <!-- dados dos destaques -->
+    <script src="/assets/js/dados_destaque.js"></script>
+
+    <!-- dados do brands -->
+    <script src="/assets/js/dados_brands.js"></script>
+
+    <!-- dados da lista de produtos -->
+    <script src="/assets/js/dados_lista_produtos.js"></script>
+
+    <!-- Inicializado vue -->
     <script>
         Vue.createApp({
             data() {
-                
                 return {
-                    destaques: [
+                    destaques: destaques,
+                    brands: brands,
+                    dataTermino: moment(new Date()).add(1, "day"),
+                    displayOferta: true,
+                    contadorOferta: "",
+                    produtos: lista_produtos,
+                    currentSlide: 0,
+                    slides: [
                         {
-                            id: 1,
-                            nome: 'Hidraulica',
-                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
-                            link: '#ver-produto',
-                            itens: [
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                }
-                            ]
+                            bg: "/assets/img/bg-banner-3.png",
+                            subtitle: "Melhor venda deste mês",
+                            title1: "Coleção Quente",
+                            title2: "Óculos Virtuais",
+                            description:
+                                "Curabitur id lectus in felis hendrerit efficitur quis quis lectus. Donec sollicitudin elit eu ipsum maximus blandit.",
                         },
                         {
-                            id: 2,
-                            nome: 'Hidraulica',
-                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
-                            link: '#ver-produto',
-                            itens: [
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                }
-                            ]
+                            bg: "/assets/img/bg-banner-3.png",
+                            subtitle: "Novo Produto",
+                            title1: "Fly More Combo",
+                            title2: "DJI Mavic Air",
+                            description:
+                                "SmartCapture • 21 minutos de voo • Sistema avançado de assistência ao piloto.",
                         },
                         {
-                            id: 3,
-                            nome: 'Hidraulica',
-                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
-                            link: '#ver-produto',
-                            itens: [
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                }
-                            ]
+                            bg: "/assets/img/bg-banner-3.png",
+                            subtitle: "Promoção Especial",
+                            title1: "Tecnologia",
+                            title2: "Do Futuro",
+                            description:
+                                "Descontos exclusivos em produtos selecionados. Aproveite agora!",
                         },
-                        {
-                            id: 4,
-                            nome: 'Hidraulica',
-                            imagem: '/assets/img/products/Registro-de-pressao-cromado-300x300.png',
-                            link: '#ver-produto',
-                            itens: [
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                },
-                                {
-                                    nome: 'Registro de pressão',
-                                    link: '/produtos/hidraulica/registro'
-                                }
-                            ]
-                        }
                     ],
-                    brands: [
-                        '/assets/img/logos-svg/Acer_2011.svg',
-                        '/assets/img/logos-svg/Amazon_Games_2025.svg',
-                        '/assets/img/logos-svg/AMD_Logo.svg',
-                        '/assets/img/logos-svg/Bosch-Logo.svg',
-                        '/assets/img/logos-svg/Canon_logo.svg',
-                        '/assets/img/logos-svg/Casio_logo.svg',
-                        '/assets/img/logos-svg/Epson_logo.svg',
-                        '/assets/img/logos-svg/Microsoft_logo_(1987).svg',
-                        '/assets/img/logos-svg/Xerox_logo_(1968-2008).svg'
-                    ]
                 }
+            },
+            methods: {
+                goToSlide(index) {
+                    this.currentSlide = index;
+                },
+                async tempoFimUltimaOferta() {
+                    setInterval(() => {
+                        let agora = moment(new Date());
+                        let diff = this.dataTermino.diff(agora);
+
+                        if (diff <= 0) {
+                            displayOferta = false;
+                            return;
+                        }
+
+                        let duracao = moment.duration(diff);
+                        this.contadorOferta = `
+                        <span class="p-2 text-gray-100 bg-red-600 rounded-lg">${String(duracao.days()).padStart(2, '0')}</span>
+                        <span>:</span>
+                        <span class="p-2 text-gray-100 bg-red-600 rounded-lg">${String(duracao.hours()).padStart(2, '0')}</span>
+                        <span>:</span>
+                        <span class="p-2 text-gray-100 bg-red-600 rounded-lg">${String(duracao.minutes()).padStart(2, '0')}</span>
+                        <span>:</span>
+                        <span class="p-2 text-gray-100 bg-red-600 rounded-lg">${String(duracao.seconds()).padStart(2, '0')}</span>
+                        `
+                    }, 1000);
+                }
+            },
+            async mounted() {
+                this.tempoFimUltimaOferta();
             }
         }).mount('body');
     </script>
