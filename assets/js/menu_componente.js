@@ -44,10 +44,22 @@ const menuComponente = {
                                         Empresa
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
+                                <li class="relative group">
+                                    <a href="#" class="active:font-bold hover:text-blue-400
+                                        text-center w-full no-underline sm:w-auto sm:pr-4 py-2 sm:py-1">
                                         Produtos
                                     </a>
+                                    <div class="absolute z-10 hidden group-hover:block rounded-lg min-w-[200px] bg-white shadow-lg">
+                                        <div class="p-4">
+                                            <div class="dropdown-menu">
+                                                <ul>
+                                                    <li>Construção civil</li>
+                                                    <li>Supermercado</li>
+                                                    <li>EPI's</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </li>
                                 <li>
                                     <a href="#">
