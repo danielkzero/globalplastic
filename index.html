@@ -10,8 +10,7 @@
     <meta name="keywords"
         content="indústria de plásticos, comércio de plásticos, tubos de PVC, conexões de PVC, produtos plásticos industriais, materiais plásticos para construção, acessórios plásticos">
     <link rel="canonical" href="https://www.globalplastic.com.br/">
-
-    <!-- CDN moments -->
+    <link rel="icon" type="image/png" href="assets/img/logomarca3.png" <!-- CDN moments -->
     <script src="https://cdn.jsdelivr.net/npm/moment@2.30.1/moment.min.js"></script>
 
     <!-- CDN tailwindCSS -->
@@ -38,7 +37,7 @@
 <body id="body" class="bg-gray-100">
 
     <!-- top header usando tailwind -->
-    <header class="hidden md:block bg-gray-200 text-gray-500">
+    <header class="hidden md:block bg-stone-200 text-gray-500">
 
         <!-- menu top header -->
         <div class="md:container mx-auto py-2 flex justify-between items-center">
@@ -71,12 +70,16 @@
         </div>
     </header>
 
-    <!-- header usando tailwind -->
-    <header class="bg-white shadow">
+    <menu-component
+        :class="isHidden == 0 ? 'hidden -translate-y-0' :(isHidden == 1 ? 'fixed top-0 w-full z-50 translate-y-0 opacity-100 duration-700' : 'duration-700 -translate-y-full opacity-0')"></menu-component>
+    <header class="bg-white shadow-md transition-all duration-500">
         <div class="md:container mx-auto py-4 flex justify-between items-center">
-            <div class="logo">
-                <a href="/" class="text-2xl font-bold text-gray-800">
+            <div class="logo md:p-0 ps-3">
+                <a href="/" class="text-2xl font-bold text-gray-800 hidden md:flex">
                     <img src="/assets/img/logomarca.png" alt="GlobalPlastic" class="h-10 inline">
+                </a>
+                <a href="/" class="text-2xl font-bold text-gray-800 flex md:hidden">
+                    <img src="/assets/img/logomarca3.png" alt="GlobalPlastic" class="h-10 inline">
                 </a>
             </div>
 
@@ -85,7 +88,7 @@
                 <form action="/search" method="GET" class="relative">
                     <input type="text" name="q" placeholder="Buscar produtos..."
                         class="w-full border border-gray-300 rounded-full py-2 px-4 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <button type="submit" class="absolute left-0 top-0 mt-2 ml-3 text-gray-400 hover:text-gray-600">
+                    <button type="submit" class="absolute left-0 top-1 mt-2 ml-3 text-gray-400 hover:text-gray-600">
                         <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                             xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -112,10 +115,15 @@
                                         Empresa
                                     </a>
                                 </li>
-                                <li>
+                                <li class="relative">
                                     <a href="#">
                                         Produtos
                                     </a>
+                                    <ul class="absolute top-8 p-3 bg-white rounded-lg w-[200px] shadow-lg border border-gray-100 gap-y-8">
+                                        <li>construção civil</li>
+                                        <li>construção civil</li>
+                                        <li>construção civil</li>
+                                    </ul>
                                 </li>
                                 <li>
                                     <a href="#">
@@ -124,6 +132,9 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="md:hidden flex p-3 mr-3">
+                            <i class='bxr bx-menu text-2xl'></i>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -131,21 +142,20 @@
     </header>
 
     <main class="md:px-0 px-3">
-        
+
         <!-- Section carousel e banner populares -->
         <section class="md:container mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-6 md:grid-flow-col md:grid-rows-5 gap-4 my-4">
 
                 <!-- CAROUSEL PRINCIPAL -->
-                <div
-                    class="relative md:row-span-5 md:col-span-4 rounded-lg md:h-[564px] overflow-hidden bg-blue-300/70">
+                <div class="relative md:row-span-5 md:col-span-4 rounded-lg md:h-[564px] overflow-hidden">
 
                     <!-- Slides -->
                     <div class="flex transition-transform duration-700 ease-in-out h-full"
                         :style="{ transform: `translateX(-${currentSlide * 100}%)` }">
                         <div v-for="(slide, index) in slides" :key="index"
                             class="w-full flex-shrink-0 h-[564px] rounded-lg"
-                            :class="`bg-[url('${slide.bg}')] bg-blue-400/70 hover:bg-blue-400/50 bg-no-repeat bg-cover bg-bottom-right md:bg-size-[700px] bg-size-[400px]`">
+                            :class="`bg-[url('${slide.bg}')] ${slide.class}`">
                             <div class="md:p-16 p-8 text-blue-800">
                                 <div class="text-gray-100 my-4">{{ slide.subtitle }}</div>
                                 <div class="md:text-6xl text-2xl font-bold md:my-4">
@@ -154,9 +164,7 @@
                                 <div class="md:text-6xl text-2xl font-bold md:my-4">
                                     {{ slide.title2 }}
                                 </div>
-                                <div class="md:w-1/2 py-4">
-                                    {{ slide.description }}
-                                </div>
+                                <div class="md:w-1/2 py-4" v-html="slide.description"></div>
                                 <div class="py-4 flex gap-4">
                                     <a href="#compre_mais"
                                         class="px-8 py-4 bg-blue-600 hover:bg-blue-700 text-blue-100 rounded-lg">
@@ -180,11 +188,11 @@
                 </div>
 
                 <!-- BLOCO 2 -->
-                <div
-                    class="row-span-5 col-span-1 md:row-span-2 md:col-span-2 bg-green-200/70 hover:bg-green-200/50 transition rounded-lg h-[200px] md:h-auto bg-[url('/assets/img/metaverse.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
+                <div class="row-span-5 col-span-1 md:row-span-2 md:col-span-2
+                    rounded-lg h-[200px] md:h-auto" :class="`bg-[url('${banner1.bg}')] ${banner1.class}`">
                     <div class="md:p-8 p-4 text-gray-600">
-                        <div class="md:text-4xl text-2xl font-bold my-4">Metaverse</div>
-                        <div class="md:w-1/2">The Future of Creativity</div>
+                        <div class="md:text-4xl text-2xl font-bold my-4" v-html="banner1.title"></div>
+                        <div class="md:w-1/2" v-html="banner1.description"></div>
                         <div class="py-4 flex gap-4">
                             <a href="#compre_mais"
                                 class="text-green-700 hover:text-green-500 rounded-lg flex items-center">
@@ -195,13 +203,11 @@
                 </div>
 
                 <!-- BLOCO 3 -->
-                <div
-                    class="row-span-5 col-span-1 md:row-span-3 md:col-span-2 bg-fuchsia-300/70 hover:bg-fuchsia-300/50 transition rounded-lg h-[200px] md:h-auto bg-[url('/assets/img/headphone.png')] bg-no-repeat bg-bottom-right md:bg-size-[300px] bg-size-[150px]">
+                <div class="row-span-5 col-span-1 md:row-span-3 md:col-span-2 
+                    rounded-lg h-[200px] md:h-auto" :class="`bg-[url('${banner2.bg}')] ${banner2.class}`">
                     <div class="md:p-8 p-4 text-gray-600">
-                        <div class="md:text-4xl text-2xl font-bold my-4 md:w-2/3">
-                            Dispositivos e software da Apple
-                        </div>
-                        <div class="md:w-1/2">Não perca a última oportunidade.</div>
+                        <div class="md:text-4xl text-2xl font-bold my-4 md:w-2/3" v-html="banner2.title"></div>
+                        <div class="md:w-1/2" v-html="banner2.description"></div>
                         <div class="py-4 flex gap-4">
                             <a href="#compre_mais"
                                 class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
@@ -216,7 +222,7 @@
 
         <!-- Section marcas e categorias -->
         <section>
-            <div class="md:container mx-auto my-8 md:flex item-center justify-center gap-2 hidden text-gray-600">
+            <div class="md:container mx-auto my-8 md:flex item-center justify-start gap-2 hidden text-lime-600">
                 <div class="w-1/4">
                     <h2 class="text-3xl font-bold flex items-center">
                         <i class='bx  bxs-certification mr-2'></i>
@@ -224,10 +230,24 @@
                     </h2>
                     <small>Aqui você encontra a melhor opção para você:</small>
                 </div>
-                <div class="w-3/4 flex item-center justify-center gap-6 border border-gray-300 rounded-lg p-3">
+                <div class="w-3/4 flex item-center justify-center gap-6 border border-gray-300 rounded-lg p-3 hidden">
                     <div v-for="brand in brands" class="w-auto">
                         <img :src="brand" class="h-10 transtion opacity-20 hover:opacity-50 cursor-pointer" />
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="relative w-full overflow-hidden my-6 mx-auto md:container">
+            <!-- Área scrollable -->
+            <div ref="slider"
+                class="flex gap-6 overflow-hidden scroll-smooth no-scrollbar cursor-grab active:cursor-grabbing"
+                @mousedown="startDrag" @mousemove="onDrag" @mouseup="endDrag" @mouseleave="endDrag"
+                @touchstart="startDrag" @touchmove="onDrag" @touchend="endDrag">
+                <div v-for="(plant, index) in plants" :key="index"
+                    class="flex-shrink-0 flex flex-col items-center w-[120px] text-center select-none">
+                    <img :src="plant.img" :alt="plant.name" class="w-24 h-24 rounded-full shadow-md p-3 bg-lime-600/50" />
+                    <p class="mt-2 text-lime-800">{{ plant.name }}</p>
                 </div>
             </div>
         </section>
@@ -265,50 +285,12 @@
         <!-- Section banner destaque -->
         <section>
             <div class="md:container md:mx-auto grid grid-cols-1 md:grid-cols-8 gap-4 my-8">
-                <div class="bg-blue-300 rounded-lg  md:col-span-2
-                    bg-[url('/assets/img/iphone-12.png')] bg-no-repeat bg-cover bg-bottom-right bg-size-[200px]">
+                <div v-for="(banner, index) in banner3Destaque" :key="index"
+                    class="bg-blue-300 rounded-lg md:col-span-2"
+                    :class="[index == 0 ? 'md:col-span-2' : 'md:col-span-3', `bg-[url('${banner.bg}')]`, `${banner.bgClass}`]">
                     <div class="md:p-8 p-4 text-gray-600">
-                        <div class="md:text-4xl text-2xl font-bold my-4">
-                            iPhone 12 Pro 128Gb
-                        </div>
-                        <div class="md:w-1/2">
-                            Venda especial
-                        </div>
-                        <div class="py-4 flex gap-4">
-                            <a href="#compre_mais"
-                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
-                                saiba mais <i class='bx  bx-arrow-right-stroke text-xl'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-green-300 rounded-lg h-[230px] md:h-auto md:col-span-3
-                    bg-[url('/assets/img/samsung.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
-                    <div class="md:p-8 p-4 text-gray-600">
-                        <div class="md:text-4xl text-2xl font-bold my-4">
-                            Samsung 2022 Led TV
-                        </div>
-                        <div class="md:w-1/2">
-                            Venda especial
-                        </div>
-                        <div class="py-4 flex gap-4">
-                            <a href="#compre_mais"
-                                class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
-                                saiba mais <i class='bx  bx-arrow-right-stroke text-xl'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:col-span-3 bg-fuchsia-300 rounded-lg h-[230px] md:h-auto 
-                    bg-[url('/assets/img/drone.png')] bg-no-repeat bg-bottom-right bg-size-[200px]">
-                    <div class="md:p-8 p-4 text-gray-600">
-                        <div class="md:text-4xl text-2xl font-bold my-4 ">
-                            Dispositivos e software da Apple
-                        </div>
-                        <div class="md:w-1/2">
-                            Não perca a última
-                            oportunidade.
-                        </div>
+                        <div class="md:text-4xl text-2xl font-bold my-4" v-html="banner.title"></div>
+                        <div class="md:w-1/2" v-html="banner.description"></div>
                         <div class="py-4 flex gap-4">
                             <a href="#compre_mais"
                                 class="text-fuchsia-700 hover:text-fuchsia-500 rounded-lg flex items-center">
@@ -424,9 +406,12 @@
 
         <!-- Section cchamada para ação inscrever-se -->
         <section>
-            <div class="md:container mx-auto my-16">
+            <div class="md:container mx-auto my-16 bg-gray-600 rounded-lg
+                bg-[url('/assets/img/products/bg-newsletter1.png')] bg-no-repeat bg-cover bg-position-[bottom_right_400px] bg-size-[150px] 
+               
+                ">
                 <div
-                    class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-8 border-gray-700 bg-gray-800/80 rounded-lg shadow-lg">
+                    class="bg-[url('/assets/img/products/bg-newsletter2.png')] before:content-[''] relative bg-no-repeat bg-cover bg-position-[bottom_left_10px] bg-size-[150px]  flex flex-col md:flex-row items-start md:items-center justify-between gap-4 p-8 border-gray-700  rounded-lg shadow-lg">
 
                     <!-- Texto -->
                     <div>
@@ -599,11 +584,20 @@
     <!-- dados da lista de produtos -->
     <script src="/assets/js/dados_lista_produtos.js"></script>
 
+    <!-- dados do componente menu -->
+    <script src="/assets/js/menu_componente.js"></script>
+
     <!-- Inicializado vue -->
     <script>
         Vue.createApp({
+            components: {
+                menuComponent: menuComponente
+            },
             data() {
                 return {
+
+                    lastScroll: 0,
+                    isHidden: 0,
                     destaques: destaques,
                     brands: brands,
                     dataTermino: moment(new Date()).add(1, "day"),
@@ -613,35 +607,118 @@
                     currentSlide: 0,
                     slides: [
                         {
-                            bg: "/assets/img/bg-banner-3.png",
-                            subtitle: "Melhor venda deste mês",
-                            title1: "Coleção Quente",
-                            title2: "Óculos Virtuais",
+                            bg: "/assets/img/banners/esfera-diamante.png",
+                            class: "md:bg-size-[350px] bg-size-[300px] bg-lime-600/70 hover:bg-lime-600/80 bg-no-repeat bg-cover bg-bottom-right",
+                            subtitle: "O versátil",
+                            title1: "Coleção Esfera",
+                            title2: "Diamante",
                             description:
-                                "Curabitur id lectus in felis hendrerit efficitur quis quis lectus. Donec sollicitudin elit eu ipsum maximus blandit.",
+                                `O vaso <b>Esfera Diamante</b> une design moderno e praticidade, trazendo estilo e elegância para qualquer ambiente. Versátil e cheio de estilo para decorar sua casa ou escritório.`,
                         },
                         {
-                            bg: "/assets/img/bg-banner-3.png",
-                            subtitle: "Novo Produto",
-                            title1: "Fly More Combo",
-                            title2: "DJI Mavic Air",
+                            bg: "/assets/img/banners/tijolinho.png",
+                            class: "md:bg-size-[350px] bg-size-[300px] bg-indigo-400/70 hover:bg-indigo-400/90 bg-no-repeat bg-cover bg-right-bottom",
+                            subtitle: "O autêntico",
+                            title1: "Coleção",
+                            title2: "Tijolinho",
                             description:
-                                "SmartCapture • 21 minutos de voo • Sistema avançado de assistência ao piloto.",
+                                `O vaso <b>Tijolinho</b> traz um charme rústico com toque moderno. Seu acabamento em relevo imita tijolos, oferecendo autenticidade e estilo para ambientes internos e externos.`,
                         },
                         {
-                            bg: "/assets/img/bg-banner-3.png",
-                            subtitle: "Promoção Especial",
-                            title1: "Tecnologia",
-                            title2: "Do Futuro",
+                            bg: "/assets/img/banners/degrau.png",
+                            class: "md:bg-size-[500px] bg-size-[300px] bg-stone-400/70 hover:bg-stone-400/80 bg-no-repeat bg-cover bg-bottom-right",
+                            subtitle: "O sofisticado",
+                            title1: "Coleção",
+                            title2: "Degrau",
                             description:
-                                "Descontos exclusivos em produtos selecionados. Aproveite agora!",
+                                `O vaso <b>Degrau</b> combina linhas marcantes em design exclusivo. Sofisticado e versátil, é perfeito para quem busca praticidade sem abrir mão da elegância.`,
                         },
                     ],
+                    banner1: {
+                        bg: "/assets/img/banners/ducha-fria-acqua-90-braco-curto.png",
+                        class: "bg-green-200/70 hover:bg-green-200/50 transition bg-no-repeat bg-position-[bottom_10px_right_30px] bg-size-[200px]",
+                        title: "Ducha Acqua",
+                        description: `Banho refrescante.`
+                    },
+                    banner2: {
+                        bg: "/assets/img/banners/protetor-auricular.png",
+                        class: "bg-fuchsia-300/70 hover:bg-fuchsia-300/50 transition bg-no-repeat bg-position-[bottom_right_30px] md:bg-size-[200px] bg-size-[170px]",
+                        title: "Protetor Auricular",
+                        description: `Proteção confortável e eficiente para seus ouvidos.`
+                    },
+                    banner3Destaque: [
+                        {
+                            bg: "/assets/img/banners/torn-lav-mesa-fixa-siena-cromada.png",
+                            bgClass: "bg-no-repeat bg-cover bg-bottom-right bg-size-[200px] bg-blue-300",
+                            title: "Torneiras",
+                            description: "Giratórias e fixas"
+                        },
+                        {
+                            bg: "/assets/img/banners/organizador.png",
+                            bgClass: "bg-no-repeat bg-cover bg-bottom-right bg-size-[200px] bg-green-300",
+                            title: "Organizadores",
+                            description: "Multiuso"
+                        },
+                        {
+                            bg: "/assets/img/banners/bobina-fundo-estrela-crist.png",
+                            bgClass: "bg-no-repeat bg-cover bg-bottom-right bg-size-[200px] bg-fuchsia-300",
+                            title: "Bobinas",
+                            description: "Para hortifruti"
+                        },
+                    ],
+
+                    plants: [
+                        { name: "Bojo Bege", img: "/assets/img/vasos/bojo-bege.png" },
+                        { name: "Bojo Terracota", img: "/assets/img/vasos/bojo-terracota.png" },
+                        { name: "Bonsai Terracota", img: "/assets/img/vasos/bonsai-terracota.png" },
+                        { name: "Bromélia Marrom", img: "/assets/img/vasos/bromelia-marrom.png" },
+                        { name: "Coluna Romana Terracota", img: "/assets/img/vasos/COLUNA-ROMANA-TERRACOTA.png" },
+                        { name: "Esfera Diamante Terracota", img: "/assets/img/vasos/Esfera-diamante-terracota.png" },
+                        { name: "Lunar Azul", img: "/assets/img/vasos/Lunar-azul.png" },
+                        { name: "Moranga Terracota", img: "/assets/img/vasos/moranga-terracota.png" },
+                        { name: "Trapézio Bege", img: "/assets/img/vasos/trapezio-bege.png" },
+                        { name: "Urban M Bege Completo", img: "/assets/img/vasos/urban-M-bege-completo.png" },
+                        { name: "Zafira Verde", img: "/assets/img/vasos/zafira-verde.png" },
+                    ],
+                    isDown: false,
+                    startX: 0,
+                    scrollLeft: 0,
+                    slider: null
                 }
             },
             methods: {
+                startDrag(e) {
+                    this.isDown = true;
+                    this.slider.classList.add("active");
+
+                    this.startX = (e.pageX || e.touches[0].pageX) - this.slider.offsetLeft;
+                    this.scrollLeft = this.slider.scrollLeft;
+                },
+                onDrag(e) {
+                    if (!this.isDown) return;
+                    e.preventDefault();
+
+                    const x = (e.pageX || e.touches[0].pageX) - this.slider.offsetLeft;
+                    const walk = (x - this.startX) * 1.2; // sensibilidade
+                    this.slider.scrollLeft = this.scrollLeft - walk;
+                },
+                endDrag() {
+                    this.isDown = false;
+                    this.slider.classList.remove("active");
+                },
                 goToSlide(index) {
                     this.currentSlide = index;
+                },
+                async carouselAutomatico(delay) {
+                    let slide = 0;
+                    let _this = this;
+                    setInterval(() => {
+                        _this.goToSlide(slide);
+                        slide++;
+                        if (slide >= _this.slides.length) {
+                            slide = 0;
+                        }
+                    }, delay);
                 },
                 async tempoFimUltimaOferta() {
                     setInterval(() => {
@@ -664,10 +741,34 @@
                         <span class="p-2 text-gray-100 bg-red-600 rounded-lg">${String(duracao.seconds()).padStart(2, '0')}</span>
                         `
                     }, 1000);
+                },
+                async handleScroll() {
+                    const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+                    if (currentScroll < 100) {
+                        this.isHidden = 0;
+                    }
+                    if (currentScroll > 250) {
+                        this.isHidden = 1;
+                    } else if (currentScroll > 100 && currentScroll < 250) {
+                        // rolando para cima
+                        this.isHidden = 2
+                    }
+                    this.lastScroll = currentScroll
                 }
             },
             async mounted() {
+                // contagem para final da oferta
                 this.tempoFimUltimaOferta();
+
+                // quantidade de segundo (5 segundos, 5000)
+                this.carouselAutomatico(5000);
+
+                window.addEventListener('scroll', this.handleScroll);
+
+                this.slider = this.$refs.slider;
+            },
+            async unmounted() {
+                window.addEventListener('scroll', this.handleScroll);
             }
         }).mount('body');
     </script>
